@@ -21,6 +21,9 @@ namespace alfa
     using System.Collections.Generic;
     using Nancy.Bootstrapper;
     using Nancy.TinyIoc;
+    using Nancy.Extensions;
+
+    using CalculateLib;
 
     public interface IAbstractOperation
     {
@@ -60,12 +63,55 @@ namespace alfa
         public override string ToString() { return $"DebugData: {Name} {Status} {Crc}"; }
     }
 
+    public class Operation1Data
+    {
+        public int[] Val { get; set; }
+    }
+
+    public class Operation2Data
+    {
+        public int[] Val1 { get; set; }
+        public int[] Val2 { get; set; }
+    }
+
+    public class Operation3Data
+    {
+        public string Val { get; set; }
+    }
+
     public class WorkerModule : NancyModule
     {
         private readonly Func<Request, bool> hostFilter = (c) => { return c.Headers.Host == "localhost:5000"; };
 
         public WorkerModule(IAbstractOperation operation)
         {
+            Post("/testjob1", parameter => // { "Val" : [111, 222, 333] }
+            {
+                var text = Context.Request.Body.AsString();
+                Console.WriteLine(text);
+                var data = this.Bind<Operation1Data>();
+                var result = Operation.SummOddByStep(data.Val, 2);
+                return result;
+            });
+
+            Post("/testjob2", parameter =>  // { "Val1" : [111, 222, 333] "Val2" : [1, 2, 3]  }
+            {
+                var text = Context.Request.Body.AsString();
+                Console.WriteLine(text);
+                var data = this.Bind<Operation2Data>();
+                var result = Operation.SummList(data.Val1, data.Val2);
+                return result;
+            });
+
+            Post("/testjob3", parameter => // { "Val" : "zopa" }
+            {
+                var text = Context.Request.Body.AsString();
+                Console.WriteLine(text);
+                var data = this.Bind<Operation3Data>();
+                var result = Operation.IsPaliander(data.Val);
+                return result;
+            });
+
             Get("/", _ =>
                {
                    Console.WriteLine(Context.Request.UserHostAddress);
@@ -115,6 +161,7 @@ namespace alfa
                });
             Get("/ArrayAsJson", _ => Response.AsJson(new string[]{ "111", "222", "333" }));
             Get("/StringAsJson", _ => Response.AsJson("String as Json"));
+            Get("/DoubleIntArrayAsJson", _ => Response.AsJson(new int[][]{ new int[]{111, 222, 333 }, new int[]{ 1, 2, 3 } }));
         }
     }
 

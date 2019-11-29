@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CalculateLib\CalculateLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="data_set_1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
