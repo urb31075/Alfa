@@ -1,4 +1,14 @@
-﻿namespace alfa
+﻿// http://localhost:5000/
+// https://habr.com/ru/company/microsoft/blog/342900/
+// 1 https://habr.com/ru/post/197298/
+// 2 https://habr.com/ru/post/199116/
+// 3 https://habr.com/ru/post/199116/
+// 4 https://habr.com/ru/post/200632/
+// 5 https://habr.com/ru/post/203346/
+// 6 https://habr.com/ru/post/203350/
+
+
+namespace alfa
 {
     using System;
     using System.IO;
@@ -42,16 +52,17 @@
         }
     }
 
+    public class DebugData
+    {
+        public string Name { get; set; }
+        public bool Status { get; set; }
+        public int Crc { get; set; }
+        public override string ToString() { return $"DebugData: {Name} {Status} {Crc}"; }
+    }
+
     public class WorkerModule : NancyModule
     {
         private readonly Func<Request, bool> hostFilter = (c) => { return c.Headers.Host == "localhost:5000"; };
-        private class DebugData
-        {
-            public string Name { get; set; }
-            public bool   Status { get; set; }
-            public int    Crc { get; set; }
-            public override string ToString() { return $"DebugData: {Name} {Status} {Crc}"; }
-        }
 
         public WorkerModule(IAbstractOperation operation)
         {
@@ -66,12 +77,21 @@
 
             Get("/debug", _ => "wlan  host debug routine");
             Get("/debug", _ => "local host debug routine", Context => hostFilter(Context.Request));
-            Get("/debugdata", _ => Response.AsJson(new DebugData() { Name="xxx", Status = true, Crc=12345 }));
-            Post("/debugdata", _ =>
+            Get("/debugdataText", _ => Response.AsText((new DebugData() { Name = "xxx", Status = true, Crc = 12345 }).ToString()));
+            Get("/debugdataJson", _ => Response.AsJson(new DebugData() { Name="xxx", Status = true, Crc=12345 }));
+            Get("/debugdataXml", _ => Response.AsXml(new DebugData() { Name = "xxx", Status = true, Crc = 12345 }));
+            Post("/debugdatajson", _ => //json {"name":"xxx","status":true,"crc":12345}
             {
                 var debugData = this.Bind<DebugData>();
                 return debugData.ToString();
             });
+
+            Post("/debugdataurl", _ => //x-www-form-urlencoded  Name=aaa&Status=false&Crc=555
+            {
+                var debugData = new DebugData() { Name = Request.Form.Name, Status = Request.Form.Status, Crc = Request.Form.Crc };
+                return debugData.ToString();
+            });
+
 
 
             Get("/index", _ => View["index"]);
