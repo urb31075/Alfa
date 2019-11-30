@@ -41,7 +41,7 @@ namespace CalculateLibTest
         [TestMethod]
         public void IsPaliander3()
         {
-            Assert.IsTrue(TestJobOperation.IsPaliander("1 2    3 45            5 4         32        1"));
+            Assert.IsTrue(TestJobOperation.IsPaliander("1 2    3 45           5 4         32        1"));
         }
     }
 }
