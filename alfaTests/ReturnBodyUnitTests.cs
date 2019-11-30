@@ -9,7 +9,6 @@
 namespace AlfaTests
 {
     using DupelOperation;
-
     using Nancy;
     using Nancy.Testing;
     using Newtonsoft.Json;
@@ -18,6 +17,7 @@ namespace AlfaTests
     /// <summary>
     /// The should return status ok.
     /// </summary>
+    [TestFixture]
     public class ReturnBodyUnitTests
     {
         /// <summary>

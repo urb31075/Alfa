@@ -46,6 +46,11 @@ namespace DupelOperation
                     var text = this.Context.Request.Body.AsString();
                     Console.WriteLine(text);
                     var data = this.Bind<TestJob1Data>();
+                    if (data.Val == null)
+                    {
+                        return this.Response.AsText("Data format error!");
+                    }
+
                     var result = TestJobOperation.SummEverySecondOdd(data.Val);
                     return this.Response.AsText(result.ToString());
                 });
@@ -57,6 +62,11 @@ namespace DupelOperation
                     var text = this.Context.Request.Body.AsString();
                     Console.WriteLine(text);
                     var data = this.Bind<TestJob2Data>();
+                    if (data.Val1 == null || data.Val2 == null)
+                    {
+                        return this.Response.AsText("Data format error!");
+                    }
+
                     var result = TestJobOperation.SummList(data.Val1, data.Val2);
                     return this.Response.AsText(result.ToString());
                 });
@@ -68,6 +78,11 @@ namespace DupelOperation
                     var text = this.Context.Request.Body.AsString();
                     Console.WriteLine(text);
                     var data = this.Bind<TestJob3Data>();
+                    if (data.Val == null)
+                    {
+                        return this.Response.AsText("Data format error!");
+                    }
+
                     var result = TestJobOperation.IsPaliander(data.Val);
                     return this.Response.AsText(result.ToString());
                 });

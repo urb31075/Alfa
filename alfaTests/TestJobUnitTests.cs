@@ -15,6 +15,7 @@ namespace AlfaTests
     /// <summary>
     /// The should return status ok.
     /// </summary>
+    [TestFixture]
     public class TestJobUnitTests
     {
         /// <summary>
