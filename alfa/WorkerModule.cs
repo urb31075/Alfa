@@ -47,7 +47,7 @@ namespace DupelOperation
                     Console.WriteLine(text);
                     var data = this.Bind<TestJob1Data>();
                     var result = TestJobOperation.SummEverySecondOdd(data.Val);
-                    return result;
+                    return this.Response.AsText(result.ToString());
                 });
 
             this.Post(
@@ -58,7 +58,7 @@ namespace DupelOperation
                     Console.WriteLine(text);
                     var data = this.Bind<TestJob2Data>();
                     var result = TestJobOperation.SummList(data.Val1, data.Val2);
-                    return result;
+                    return this.Response.AsText(result.ToString());
                 });
 
             this.Post(
@@ -69,7 +69,7 @@ namespace DupelOperation
                     Console.WriteLine(text);
                     var data = this.Bind<TestJob3Data>();
                     var result = TestJobOperation.IsPaliander(data.Val);
-                    return result;
+                    return this.Response.AsText(result.ToString());
                 });
 
             this.Get(
@@ -87,15 +87,15 @@ namespace DupelOperation
             this.Get("/debug", _ => "Local host debug routine", context => this.hostFilter(context.Request));
             this.Get(
                 "/debugdataText",
-                _ => this.Response.AsText((new DebugData() { Name = "xxx", Status = true, Crc = 12345 }).ToString()));
+                _ => this.Response.AsText(new DebugData { Name = "xxx", Status = true, Crc = 12345 }.ToString()));
             this.Get(
                 "/debugdataJson",
-                _ => this.Response.AsJson(new DebugData() { Name = "xxx", Status = true, Crc = 12345 }));
+                _ => this.Response.AsJson(new DebugData { Name = "xxx", Status = true, Crc = 12345 }));
             this.Get(
                 "/debugdataXml",
-                _ => this.Response.AsXml(new DebugData() { Name = "xxx", Status = true, Crc = 12345 }));
+                _ => this.Response.AsXml(new DebugData { Name = "xxx", Status = true, Crc = 12345 }));
             this.Post(
-                "/debugdatajson",
+                "/debugdataJson",
                 _ => // json {"name":"xxx","status":true,"crc":12345} 
                 {
                     var debugData = this.Bind<DebugData>();
@@ -106,7 +106,7 @@ namespace DupelOperation
                 "/debugdataurl",
                 _ => // x-www-form-urlencoded  Name=aaa&Status=false&Crc=555
                 {
-                    var debugData = new DebugData() { Name = this.Request.Form.Name, Status = this.Request.Form.Status, Crc = this.Request.Form.Crc };
+                    var debugData = new DebugData { Name = this.Request.Form.Name, Status = this.Request.Form.Status, Crc = this.Request.Form.Crc };
                     return debugData.ToString();
                 });
 
@@ -140,7 +140,7 @@ namespace DupelOperation
         /// <summary>
         /// The debug data.
         /// </summary>
-        private class DebugData
+        public class DebugData
         {
             /// <summary>
             /// Gets or sets the name.
