@@ -6,7 +6,7 @@
 //   The AbstractOperation interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace DupelOperation
+namespace Alfa
 {
     /// <summary>
     /// The AbstractOperation interface.

@@ -6,7 +6,7 @@
 //   Defines the Startup type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace DupelOperation
+namespace Alfa
 {
     using System;
 

@@ -6,7 +6,7 @@
 //   Defines the WorkerModule type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace DupelOperation
+namespace Alfa
 {
     using System;
     using System.Collections.Generic;
@@ -32,7 +32,7 @@ namespace DupelOperation
 
         /// <inheritdoc />
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:DupelOperation.WorkerModule" /> class.
+        /// Initializes a new instance of the <see cref="T:Alfa.WorkerModule" /> class.
         /// </summary>
         /// <param name="operation">
         /// The operation.

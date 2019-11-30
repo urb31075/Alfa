@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.902
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "alfa", "alfa\alfa.csproj", "{89C504A7-BCC6-4D22-AC7A-F27721ADB774}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alfa", "alfa\Alfa.csproj", "{89C504A7-BCC6-4D22-AC7A-F27721ADB774}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalculateLib", "CalculateLib\CalculateLib.csproj", "{442B4FB8-036B-46E9-8F5E-03902001F639}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalculateLibTest", "CalculateLibTest\CalculateLibTest.csproj", "{42E54CE6-F4D8-4114-9E1B-E3A5D7927A3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "alfaTests", "alfaTests\alfaTests.csproj", "{DC4205B4-726F-4175-812F-C0648BCC7ED5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlfaTests", "alfaTests\AlfaTests.csproj", "{DC4205B4-726F-4175-812F-C0648BCC7ED5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -3,8 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <AssemblyName>dupel</AssemblyName>
-    <RootNamespace>DupelOperation</RootNamespace>
+    <AssemblyName>Alfa</AssemblyName>
+    <RootNamespace>Alfa</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

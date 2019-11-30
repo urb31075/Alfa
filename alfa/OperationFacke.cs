@@ -6,7 +6,7 @@
 //   Defines the FackeOperation type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace DupelOperation
+namespace Alfa
 {
     /// <inheritdoc />
     /// <summary>

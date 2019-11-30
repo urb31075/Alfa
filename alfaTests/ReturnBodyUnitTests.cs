@@ -8,7 +8,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace AlfaTests
 {
-    using DupelOperation;
+    using Alfa;
     using Nancy;
     using Nancy.Testing;
     using Newtonsoft.Json;

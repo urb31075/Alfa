@@ -6,7 +6,7 @@
 //   The worker bootstrapper.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace DupelOperation
+namespace Alfa
 {
     using Nancy;
     using Nancy.Bootstrapper;

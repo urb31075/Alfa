@@ -14,7 +14,7 @@
 // 4 https://habr.com/ru/post/200632/
 // 5 https://habr.com/ru/post/203346/
 // 6 https://habr.com/ru/post/203350/
-namespace DupelOperation
+namespace Alfa
 {
     using System;
     using System.IO;
