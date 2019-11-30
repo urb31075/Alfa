@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Operation.cs" company="URBLab">
+// <copyright file="TestJobOperation.cs" company="URBLab">
 //   All Right Reserved   
 // </copyright>
 // <summary>
@@ -15,7 +15,7 @@ namespace CalculateLib
     /// <summary>
     /// The operation.
     /// </summary>
-    public static class Operation
+    public static class TestJobOperation
     {
         /// <summary>
         /// The summ every second odd.

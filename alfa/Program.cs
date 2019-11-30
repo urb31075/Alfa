@@ -6,6 +6,14 @@
 //   The program.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+// http://localhost:5000/
+// https://habr.com/ru/company/microsoft/blog/342900/
+// 1 https://habr.com/ru/post/197298/
+// 2 https://habr.com/ru/post/199116/
+// 3 https://habr.com/ru/post/199116/
+// 4 https://habr.com/ru/post/200632/
+// 5 https://habr.com/ru/post/203346/
+// 6 https://habr.com/ru/post/203350/
 namespace DupelOperation
 {
     using System;

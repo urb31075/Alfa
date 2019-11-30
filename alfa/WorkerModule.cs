@@ -46,7 +46,7 @@ namespace DupelOperation
                     var text = this.Context.Request.Body.AsString();
                     Console.WriteLine(text);
                     var data = this.Bind<TestJob1Data>();
-                    var result = Operation.SummEverySecondOdd(data.Val);
+                    var result = TestJobOperation.SummEverySecondOdd(data.Val);
                     return result;
                 });
 
@@ -57,7 +57,7 @@ namespace DupelOperation
                     var text = this.Context.Request.Body.AsString();
                     Console.WriteLine(text);
                     var data = this.Bind<TestJob2Data>();
-                    var result = Operation.SummList(data.Val1, data.Val2);
+                    var result = TestJobOperation.SummList(data.Val1, data.Val2);
                     return result;
                 });
 
@@ -68,7 +68,7 @@ namespace DupelOperation
                     var text = this.Context.Request.Body.AsString();
                     Console.WriteLine(text);
                     var data = this.Bind<TestJob3Data>();
-                    var result = Operation.IsPaliander(data.Val);
+                    var result = TestJobOperation.IsPaliander(data.Val);
                     return result;
                 });
 
