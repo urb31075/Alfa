@@ -16,7 +16,6 @@ namespace Alfa
     using System.Linq;
 
     using CalculateLib;
-
     using Nancy;
     using Nancy.Extensions;
     using Nancy.ModelBinding;
@@ -244,7 +243,7 @@ namespace Alfa
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Alfa.EventsModule" /> class.
         /// </summary>
-        public EventsModule() : base("/events")
+        public EventsModule(/*IEventStore eventStore*/) : base("/events")
         {
             this.Get(
                 "/",
