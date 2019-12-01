@@ -234,4 +234,84 @@ namespace Alfa
             public string Val { get; set; }
         }
     }
+
+    /// <summary>
+    /// The events module.
+    /// </summary>
+    public sealed class EventsModule : NancyModule
+    {
+        /// <inheritdoc />
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Alfa.EventsModule" /> class.
+        /// </summary>
+        public EventsModule() : base("/events")
+        {
+            this.Get(
+                "/",
+                _ =>
+                    {
+                        if (!int.TryParse(this.Request.Query.first.Value, out int first))
+                        {
+                            first = 0;
+                        }
+
+                        if (!int.TryParse(this.Request.Query.last.Value, out int last))
+                        {
+                            last = 0;
+                        }
+
+                        var message = GetEventBody(first, last).Aggregate(string.Empty, (current, e) => current + e.ToString() + " ");
+                        return $"Event from {first} to {last} : {message.TrimEnd()}";
+                    });
+        }
+
+        /// <summary>
+        /// The get event body.
+        /// </summary>
+        /// <param name="first">
+        /// The first.
+        /// </param>
+        /// <param name="last">
+        /// The last.
+        /// </param>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
+        private static IEnumerable<EventBody> GetEventBody(int first, int last)
+        {
+            return new List<EventBody>()
+                       {
+                           new EventBody { EventName = "aaa", Priority = 4 },
+                           new EventBody { EventName = "bbb", Priority = 1 },
+                           new EventBody { EventName = "ccc", Priority = 0 }
+                       };
+        }
+
+        /// <summary>
+        /// The event body.
+        /// </summary>
+        private class EventBody
+        {
+            /// <summary>
+            /// Gets or sets the event name.
+            /// </summary>
+            public string EventName { get; set; }
+
+            /// <summary>
+            /// Gets or sets the priority.
+            /// </summary>
+            public int Priority { private get; set; }
+
+            /// <summary>
+            /// The to string.
+            /// </summary>
+            /// <returns>
+            /// The <see cref="string"/>.
+            /// </returns>
+            public override string ToString()
+            {
+                return $"[{this.EventName}:{this.Priority}]";
+            }
+        }
+    }
 }
