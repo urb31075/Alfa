@@ -24,7 +24,7 @@ namespace AlfaTests
         [Test]
         public void FailedDummyTest()
         {
-           Assert.IsTrue(false);
+           Assert.IsTrue(true);
         }
     }
 }

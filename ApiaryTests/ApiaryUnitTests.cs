@@ -14,6 +14,9 @@ namespace ApiaryTests
     using System.Collections.Generic;
     using System.Net.Http;
     using Newtonsoft.Json;
+    using Polly;
+    using Polly.Retry;
+
     using Xunit;
 
     /// <summary>
@@ -22,14 +25,24 @@ namespace ApiaryTests
     public class ApiaryUnitTests
     {
         /// <summary>
+        /// The base address.
+        /// </summary>
+        private static readonly Uri ApiaryBaseAddress = new Uri("https://private-97c8ab-dupel.apiary-mock.com/");
+
+        /// <summary>
+        /// The exponential retry policy.
+        /// </summary>
+        private static readonly AsyncRetryPolicy ExponentialRetryPolicy = Policy.Handle<Exception>().WaitAndRetryAsync(
+            3,
+            attempt => TimeSpan.FromMilliseconds(100 * Math.Pow(2, attempt)));
+
+        /// <summary>
         /// The dupel test 1.
         /// </summary>
         [Fact]
         public async void DupelTest1()
         {
-            var baseAddress = new Uri("https://private-97c8ab-dupel.apiary-mock.com/");
-
-            using (var httpClient = new HttpClient { BaseAddress = baseAddress })
+            using (var httpClient = new HttpClient { BaseAddress = ApiaryBaseAddress })
             {
                 using (var response = await httpClient.GetAsync("test"))
                 {
@@ -39,6 +52,31 @@ namespace ApiaryTests
                     Assert.Equal("bbb", data[0].Data2);
                     Assert.Equal("ccc", data[0].Data3);
                 }
+            }
+
+            Assert.True(true);
+        }
+
+        /// <summary>
+        /// The dupel test 2.
+        /// </summary>
+        [Fact]
+        public async void DupelTest2()
+        {
+            using (var httpClient = new HttpClient { BaseAddress = ApiaryBaseAddress })
+            {
+                await ExponentialRetryPolicy.ExecuteAsync(
+                    async () =>
+                        {
+                            using (var response = await httpClient.GetAsync("test"))
+                            {
+                                var responseData = await response.Content.ReadAsStringAsync();
+                                var data = JsonConvert.DeserializeObject<List<DupelData>>(responseData);
+                                Assert.Equal("aaa", data[0].Data1);
+                                Assert.Equal("bbb", data[0].Data2);
+                                Assert.Equal("ccc", data[0].Data3);
+                            }
+                        });
             }
 
             Assert.True(true);
